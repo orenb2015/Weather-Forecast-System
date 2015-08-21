@@ -1,5 +1,5 @@
 package finaljavaproject;
 
 public interface IWeatherDataService {
-	public WeatherData getWeatherData(int locationId) throws WeatherDataServiceException;
+	public WeatherData getWeatherData(Location location) throws WeatherDataServiceException;
 }
