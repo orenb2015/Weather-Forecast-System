@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalTime;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,7 +23,7 @@ public class OpenWeatherMapDataService implements IWeatherDataService {
 			WeatherData data = generateWeatherDataFromJSON(jsonData);
 			return data;
 		} catch (Exception ex) {
-			throw new WeatherDataServiceException("Something bad happened");
+			throw new WeatherDataServiceException("Something bad happened", ex);
 		}
 	}
 
@@ -49,20 +51,47 @@ public class OpenWeatherMapDataService implements IWeatherDataService {
 		weatherData.setHumidity(mainObj.getInt("humidity"));
 		weatherData.setTempMax(mainObj.getDouble("temp_max"));
 		weatherData.setTempMin(mainObj.getDouble("temp_min"));
-		//private String cityID;
-		//private String cityName;
-		//private int clouds;
-		//private String countryCode;
-		//private int rain3h;
-		//private int snow3h;
-		//private LocalTime sunrise;
-		//private LocalTime sunset;
-		//private LocalTime timeOfCalculation;
-		//private int windDeg;
-		//private int windSpeed;
-
 		
-		//weatherData.setWeatherDescription(weatherDescription);
+		JSONObject windObj = jsonObject.getJSONObject("wind");
+		weatherData.setWindSpeed(windObj.optDouble("speed"));
+		weatherData.setWindDeg(windObj.optDouble("deg"));
+		
+		JSONObject rainObj = jsonObject.optJSONObject("rain");
+		if (rainObj != null)
+		{
+			double rain3h = rainObj.optDouble("3h");
+			if (rain3h != Double.NaN)
+				weatherData.setRain3h(rain3h);
+		}
+		
+		JSONObject snowObj = jsonObject.optJSONObject("snow");
+		if (snowObj != null)
+		{
+			double snow3h = snowObj.optDouble("3h");
+			if (snow3h != Double.NaN)
+				weatherData.setSnow3h(snow3h);
+		}
+		
+		JSONObject cloudsObj = jsonObject.optJSONObject("clouds");
+		if (cloudsObj != null)
+		{
+			int cloudsAll = cloudsObj.optInt("all");
+			if (cloudsAll != 0)
+				weatherData.setClouds(cloudsAll);
+		}
+		
+		// date is from UTC (greenwich, england)
+		int dt = jsonObject.getInt("dt");
+		DateTime timeOfCalculation = new DateTime(dt * 1000L, DateTimeZone.UTC);
+		weatherData.setTimeOfCalculation(timeOfCalculation);
+		
+		JSONObject sysObj = jsonObject.getJSONObject("sys");
+		weatherData.setCountryCode(sysObj.getString("country"));
+		weatherData.setSunrise(new DateTime(1000L * sysObj.getInt("sunrise"), DateTimeZone.UTC));
+		weatherData.setSunset(new DateTime(1000L * sysObj.getInt("sunset"), DateTimeZone.UTC));
+		
+		weatherData.setCityID(jsonObject.getInt("id"));
+		weatherData.setCityName(jsonObject.getString("name"));
 		
 		return weatherData;
 	}

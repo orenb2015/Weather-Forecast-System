@@ -2,9 +2,11 @@ package finaljavaproject;
 
 import java.time.LocalTime;
 
+import org.joda.time.DateTime;
+
 public class WeatherData {
 
-	private String cityID;
+	private int cityID;
 	private String cityName;
 	private int clouds;
 	private double coordLat;
@@ -12,19 +14,19 @@ public class WeatherData {
 	private String countryCode;
 	private int humidity;
 	private int pressure;
-	private int rain3h;
-	private int snow3h;
-	private LocalTime sunrise;
-	private LocalTime sunset;
+	private double rain3h;
+	private double snow3h;
+	private DateTime sunrise;
+	private DateTime sunset;
 	private double temp;
 	private double tempMax;
 	private double tempMin;
-	private LocalTime timeOfCalculation;
+	private DateTime timeOfCalculation;
 	private String weatherDescription;
 	private String weatherIcon;
-	private int windDeg;
-	private int windSpeed;
-	public String getCityID() {
+	private double windDeg;
+	private double windSpeed;
+	public int getCityID() {
 		return cityID;
 	}
 	public String getCityName() {
@@ -55,19 +57,19 @@ public class WeatherData {
 		return pressure;
 	}
 
-	public int getRain3h() {
+	public double getRain3h() {
 		return rain3h;
 	}
 
-	public int getSnow3h() {
+	public double getSnow3h() {
 		return snow3h;
 	}
 
-	public LocalTime getSunrise() {
+	public DateTime getSunrise() {
 		return sunrise;
 	}
 
-	public LocalTime getSunset() {
+	public DateTime getSunset() {
 		return sunset;
 	}
 
@@ -83,7 +85,7 @@ public class WeatherData {
 		return tempMin;
 	}
 
-	public LocalTime getTimeOfCalculation() {
+	public DateTime getTimeOfCalculation() {
 		return timeOfCalculation;
 	}
 
@@ -95,15 +97,15 @@ public class WeatherData {
 		return weatherIcon;
 	}
 
-	public int getWindDeg() {
+	public double getWindDeg() {
 		return windDeg;
 	}
 
-	public int getWindSpeed() {
+	public double getWindSpeed() {
 		return windSpeed;
 	}
 
-	public void setCityID(String cityID) {
+	public void setCityID(int cityID) {
 		this.cityID = cityID;
 	}
 
@@ -135,19 +137,19 @@ public class WeatherData {
 		this.pressure = pressure;
 	}
 
-	public void setRain3h(int rain3h) {
+	public void setRain3h(double rain3h) {
 		this.rain3h = rain3h;
 	}
 
-	public void setSnow3h(int snow3h) {
+	public void setSnow3h(double snow3h) {
 		this.snow3h = snow3h;
 	}
 
-	public void setSunrise(LocalTime sunrise) {
+	public void setSunrise(DateTime sunrise) {
 		this.sunrise = sunrise;
 	}
 
-	public void setSunset(LocalTime sunset) {
+	public void setSunset(DateTime sunset) {
 		this.sunset = sunset;
 	}
 
@@ -163,7 +165,7 @@ public class WeatherData {
 		this.tempMin = tempMin;
 	}
 
-	public void setTimeOfCalculation(LocalTime timeOfCalculation) {
+	public void setTimeOfCalculation(DateTime timeOfCalculation) {
 		this.timeOfCalculation = timeOfCalculation;
 	}
 
@@ -175,11 +177,11 @@ public class WeatherData {
 		this.weatherIcon = weatherIcon;
 	}
 
-	public void setWindDeg(int windDeg) {
+	public void setWindDeg(double windDeg) {
 		this.windDeg = windDeg;
 	}
 
-	public void setWindSpeed(int windSpeed) {
+	public void setWindSpeed(double windSpeed) {
 		this.windSpeed = windSpeed;
 	}
 }
