@@ -1,10 +1,13 @@
 package gui;
 
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -51,6 +54,13 @@ public class MainApplicationView {
 		frame.setBounds(100, 100, 555, 543);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		try {
+			frame.setContentPane(new ImagePanel(ImageIO.read(new File(
+					"resources\\background.png"))));
+		} catch (IOException e) {
+			displayError("Couldn't display background image. message: "
+					+ e.getMessage());
+		}
 
 		JLabel lblCity = new JLabel("City:");
 		lblCity.setBounds(10, 11, 46, 14);
