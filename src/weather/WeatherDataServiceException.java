@@ -1,4 +1,4 @@
-package finaljavaproject;
+package weather;
 
 public class WeatherDataServiceException extends Exception {
 

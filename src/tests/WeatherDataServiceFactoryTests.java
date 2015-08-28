@@ -2,8 +2,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import finaljavaproject.IWeatherDataService;
-import finaljavaproject.WeatherDataServiceFactory;
+import weather.IWeatherDataService;
+import weather.WeatherDataServiceFactory;
 
 public class WeatherDataServiceFactoryTests {
 

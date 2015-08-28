@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import finaljavaproject.WeatherData;
+import weather.WeatherData;
 
 public class WeatherDataTests {
 

@@ -1,4 +1,4 @@
-package finaljavaproject;
+package weather;
 
 import java.time.LocalTime;
 

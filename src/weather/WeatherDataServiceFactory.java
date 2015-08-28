@@ -1,4 +1,4 @@
-package finaljavaproject;
+package weather;
 
 public class WeatherDataServiceFactory {
 	public static final int OPEN_WEATHER_MAP = 0;

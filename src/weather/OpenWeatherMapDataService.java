@@ -1,11 +1,10 @@
-package finaljavaproject;
+package weather;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalTime;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -23,7 +22,7 @@ public class OpenWeatherMapDataService implements IWeatherDataService {
 			WeatherData data = generateWeatherDataFromJSON(jsonData);
 			return data;
 		} catch (Exception ex) {
-			throw new WeatherDataServiceException("Something bad happened", ex);
+			throw new WeatherDataServiceException("Could not get weather data from openweathermap", ex);
 		}
 	}
 
@@ -60,7 +59,7 @@ public class OpenWeatherMapDataService implements IWeatherDataService {
 		if (rainObj != null)
 		{
 			double rain3h = rainObj.optDouble("3h");
-			if (rain3h != Double.NaN)
+			if (!Double.isNaN(rain3h))
 				weatherData.setRain3h(rain3h);
 		}
 		
@@ -68,7 +67,7 @@ public class OpenWeatherMapDataService implements IWeatherDataService {
 		if (snowObj != null)
 		{
 			double snow3h = snowObj.optDouble("3h");
-			if (snow3h != Double.NaN)
+			if (!Double.isNaN(snow3h))
 				weatherData.setSnow3h(snow3h);
 		}
 		

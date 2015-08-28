@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import finaljavaproject.WeatherDataServiceException;
+import weather.WeatherDataServiceException;
 
 public class WeatherDataServiceExceptionTests {
 
