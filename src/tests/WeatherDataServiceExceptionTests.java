@@ -1,16 +1,10 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import weather.WeatherDataServiceException;
 
 public class WeatherDataServiceExceptionTests {
-
-	@Test(expected = WeatherDataServiceException.class)
-	public void validException() throws WeatherDataServiceException {
-		throw new WeatherDataServiceException("something bad");
-	}
-
 	@Test
 	public void checkExceptionMessage() {
 		WeatherDataServiceException ex = new WeatherDataServiceException(

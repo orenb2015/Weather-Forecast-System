@@ -1,7 +1,5 @@
 package weather;
 
-import java.time.LocalTime;
-
 import org.joda.time.DateTime;
 
 public class WeatherData {
@@ -26,9 +24,11 @@ public class WeatherData {
 	private String weatherIcon;
 	private double windDeg;
 	private double windSpeed;
+
 	public int getCityID() {
 		return cityID;
 	}
+
 	public String getCityName() {
 		return cityName;
 	}

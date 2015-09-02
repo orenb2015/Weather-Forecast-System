@@ -1,14 +1,13 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import weather.Location;
 
-
 public class LocationTests {
 
 	@Test
-	public void test1() throws Exception {
+	public void checkSetAndGet() throws Exception {
 		Location loc = new Location("555");
 		assertEquals("555", loc.getId());
 	}

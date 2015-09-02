@@ -24,7 +24,6 @@ import weather.WeatherData;
 public class MainApplicationView {
 
 	private JFrame frame;
-	private JLabel lblCoordinatesLongtitude;
 	private JTextField cityIDValueLabel;
 	private JTextField cityNameValueLabel;
 	private JTextField cloudsValueLabel;
@@ -55,6 +54,7 @@ public class MainApplicationView {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		try {
+			// display our background image.
 			frame.setContentPane(new ImagePanel(ImageIO.read(new File(
 					"resources\\background.png"))));
 		} catch (IOException e) {
@@ -66,20 +66,19 @@ public class MainApplicationView {
 		lblCity.setBounds(10, 11, 46, 14);
 		frame.getContentPane().add(lblCity);
 
+		// insert all our cities list into the combobox
 		currentCityComboBox = new JComboBox();
-		/*
-		 * for (int i = 0; i < cities.size(); i++) { String city =
-		 * cities.get(i); comboBox.addItem(city); }
-		 */
-		for (String city : cities) {
+		for (int i = 0; i < cities.size(); i++) {
+			String city = cities.get(i);
 			currentCityComboBox.addItem(city);
 		}
 		currentCityComboBox.setBounds(66, 8, 307, 20);
 		frame.getContentPane().add(currentCityComboBox);
 
+		// create get weather button + set the action listener + command.
 		JButton btnGetWeather = new JButton("Get Weather");
 		btnGetWeather.setBounds(383, 7, 146, 23);
-		btnGetWeather.addActionListener(listener);
+		btnGetWeather.addActionListener(listener); // listener = controller
 		btnGetWeather.setActionCommand(GET_WEATHER_COMMAND);
 		frame.getContentPane().add(btnGetWeather);
 
@@ -99,7 +98,7 @@ public class MainApplicationView {
 		lblCoordinatesLatitude.setBounds(10, 111, 154, 14);
 		frame.getContentPane().add(lblCoordinatesLatitude);
 
-		lblCoordinatesLongtitude = new JLabel("Coordinates Longtitude:");
+		JLabel lblCoordinatesLongtitude = new JLabel("Coordinates Longtitude:");
 		lblCoordinatesLongtitude.setBounds(10, 136, 154, 14);
 		frame.getContentPane().add(lblCoordinatesLongtitude);
 
@@ -284,15 +283,26 @@ public class MainApplicationView {
 		frame.getContentPane().add(iconLabel);
 	}
 
+	/**
+	 * display main window
+	 */
 	public void displayMainWindow() {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * @return the current city and country code from the combobox.
+	 */
 	public String getCurrentCityAndCountryCode() {
 		return (String) currentCityComboBox.getSelectedItem();
 	}
 
-	public void DisplayWeatherData(WeatherData data) {
+	/**
+	 * display the weatherdata model on the screen + icon.
+	 * @param data model
+	 * @throws MalformedURLException
+	 */
+	public void displayWeatherData(WeatherData data) throws MalformedURLException {
 		cityIDValueLabel.setText(String.valueOf(data.getCityID()));
 		cityNameValueLabel.setText(data.getCityName());
 		cloudsValueLabel.setText(String.valueOf(data.getClouds()));
@@ -316,23 +326,22 @@ public class MainApplicationView {
 		windDegValueLabel.setText(String.valueOf(data.getWindDeg()));
 		windSpeedValueLabel.setText(String.valueOf(data.getWindSpeed()));
 
+		// display icon from openweathermap.
 		iconLabel.setIcon(createImageIcon("http://openweathermap.org/img/w/"
 				+ data.getWeatherIcon() + ".png"));
 	}
 
-	ImageIcon createImageIcon(String path) {
-		java.net.URL imgURL;
-		try {
-			imgURL = new URL(path);
+	ImageIcon createImageIcon(String path) throws MalformedURLException {
+		java.net.URL imgURL = new URL(path);
+			// create image icon without description.
 			ImageIcon icon = new ImageIcon(imgURL, "");
 			return icon;
-
-		} catch (MalformedURLException e) {
-			displayError(e.getMessage());
-		}
-		return null;
 	}
 
+	/**
+	 * display dialog of error.
+	 * @param errorText the text to display
+	 */
 	public void displayError(String errorText) {
 		JOptionPane.showMessageDialog(frame, errorText, "Error",
 				JOptionPane.ERROR_MESSAGE);
